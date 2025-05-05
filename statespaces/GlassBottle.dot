@@ -1,0 +1,22 @@
+digraph html {
+S0[label="S0: \n "];
+S1[label="S1: \n "];
+S0 -> S1[label="personB.THROW"];
+S2[label="S2: \n "];
+S1 -> S2[label="personA.THROW"];
+S3[label="S3: \n bottleShattered"];
+S2 -> S3[label="bottle.GETHIT"];
+S4[label="S4: \n bottleShattered"];
+S2 -> S4[label="bottle.GETHIT"];
+S5[label="S5: \n bottleShattered"];
+S4 -> S5[label="personB.THROW"];
+S6[label="S6: \n bottleShattered"];
+S5 -> S6[label="bottle.GETHIT"];
+S7[label="S7: \n bottleShattered"];
+S6 -> S7[label="personA.THROW"];
+S8[label="S8: \n "];
+S7 -> S8[label="bottle.RESTART"];
+S8 -> S4[label="bottle.GETHIT"];
+S4[label="S4: \n bottleShattered"];
+S8 -> S4[label="bottle.GETHIT"];
+}

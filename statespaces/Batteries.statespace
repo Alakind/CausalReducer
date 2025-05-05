@@ -1,0 +1,263 @@
+<transitionsystem>
+<state id="0" atomicpropositions="isOn1,isOn2,isOn3," >
+	<rebec name="battery1">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery1">TurnOff()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery2">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery2">TurnOff()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery3">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery3">TurnOff()</message>
+		</queue>
+	</rebec>
+</state>
+<state id="1" atomicpropositions="isOn2,isOn3," >
+	<rebec name="battery1">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery1">TurnOn()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery2">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery2">TurnOff()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery3">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery3">TurnOff()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="0" destination="1"> <messageserver sender="battery1" owner="battery1" title="TURNOFF"/></transition>
+<state id="2" atomicpropositions="isOn1,isOn2,isOn3," >
+	<rebec name="battery1">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery1">TurnOff()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery2">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery2">TurnOff()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery3">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery3">TurnOff()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="1" destination="2"> <messageserver sender="battery1" owner="battery1" title="TURNON"/></transition>
+<transition source="2" destination="1"> <messageserver sender="battery1" owner="battery1" title="TURNOFF"/></transition>
+<state id="3" atomicpropositions="isOn1,isOn3," >
+	<rebec name="battery1">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery1">TurnOff()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery2">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery2">TurnOn()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery3">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery3">TurnOff()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="2" destination="3"> <messageserver sender="battery2" owner="battery2" title="TURNOFF"/></transition>
+<state id="4" atomicpropositions="isOn3," >
+	<rebec name="battery1">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery1">TurnOn()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery2">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery2">TurnOn()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery3">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery3">TurnOff()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="3" destination="4"> <messageserver sender="battery1" owner="battery1" title="TURNOFF"/></transition>
+<transition source="4" destination="3"> <messageserver sender="battery1" owner="battery1" title="TURNON"/></transition>
+<transition source="4" destination="1"> <messageserver sender="battery2" owner="battery2" title="TURNON"/></transition>
+<state id="5" atomicpropositions="" >
+	<rebec name="battery1">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery1">TurnOn()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery2">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery2">TurnOn()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery3">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery3">TurnOn()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="4" destination="5"> <messageserver sender="battery3" owner="battery3" title="TURNOFF"/></transition>
+<state id="6" atomicpropositions="isOn1," >
+	<rebec name="battery1">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery1">TurnOff()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery2">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery2">TurnOn()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery3">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery3">TurnOn()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="5" destination="6"> <messageserver sender="battery1" owner="battery1" title="TURNON"/></transition>
+<transition source="6" destination="5"> <messageserver sender="battery1" owner="battery1" title="TURNOFF"/></transition>
+<state id="7" atomicpropositions="isOn1,isOn2," >
+	<rebec name="battery1">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery1">TurnOff()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery2">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery2">TurnOff()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery3">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery3">TurnOn()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="6" destination="7"> <messageserver sender="battery2" owner="battery2" title="TURNON"/></transition>
+<state id="8" atomicpropositions="isOn2," >
+	<rebec name="battery1">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery1">TurnOn()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery2">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery2">TurnOff()</message>
+		</queue>
+	</rebec>
+	<rebec name="battery3">
+		<statevariables>
+			<variable name="Battery.isOn" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="battery3">TurnOn()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="7" destination="8"> <messageserver sender="battery1" owner="battery1" title="TURNOFF"/></transition>
+<transition source="8" destination="7"> <messageserver sender="battery1" owner="battery1" title="TURNON"/></transition>
+<transition source="8" destination="5"> <messageserver sender="battery2" owner="battery2" title="TURNOFF"/></transition>
+<transition source="8" destination="1"> <messageserver sender="battery3" owner="battery3" title="TURNON"/></transition>
+<transition source="7" destination="6"> <messageserver sender="battery2" owner="battery2" title="TURNOFF"/></transition>
+<transition source="7" destination="2"> <messageserver sender="battery3" owner="battery3" title="TURNON"/></transition>
+<transition source="6" destination="3"> <messageserver sender="battery3" owner="battery3" title="TURNON"/></transition>
+<transition source="5" destination="8"> <messageserver sender="battery2" owner="battery2" title="TURNON"/></transition>
+<transition source="5" destination="4"> <messageserver sender="battery3" owner="battery3" title="TURNON"/></transition>
+<transition source="3" destination="2"> <messageserver sender="battery2" owner="battery2" title="TURNON"/></transition>
+<transition source="3" destination="6"> <messageserver sender="battery3" owner="battery3" title="TURNOFF"/></transition>
+<transition source="2" destination="7"> <messageserver sender="battery3" owner="battery3" title="TURNOFF"/></transition>
+<transition source="1" destination="4"> <messageserver sender="battery2" owner="battery2" title="TURNOFF"/></transition>
+<transition source="1" destination="8"> <messageserver sender="battery3" owner="battery3" title="TURNOFF"/></transition>
+<transition source="0" destination="3"> <messageserver sender="battery2" owner="battery2" title="TURNOFF"/></transition>
+<transition source="0" destination="7"> <messageserver sender="battery3" owner="battery3" title="TURNOFF"/></transition>
+</transitionsystem>

@@ -1,0 +1,268 @@
+<transitionsystem>
+<state id="0" atomicpropositions="" >
+	<rebec name="personB">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="personB">Throw()</message>
+		</queue>
+	</rebec>
+	<rebec name="personA">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="personA">Throw()</message>
+		</queue>
+	</rebec>
+	<rebec name="bottle">
+		<statevariables>
+			<variable name="Bottle.isShattered" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+</state>
+<state id="1" atomicpropositions="" >
+	<rebec name="personB">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="personA">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="personA">Throw()</message>
+		</queue>
+	</rebec>
+	<rebec name="bottle">
+		<statevariables>
+			<variable name="Bottle.isShattered" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="personB">GetHit()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="0" destination="1"> <messageserver sender="personB" owner="personB" title="THROW"/></transition>
+<state id="2" atomicpropositions="" >
+	<rebec name="personB">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="personA">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="bottle">
+		<statevariables>
+			<variable name="Bottle.isShattered" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="personB">GetHit()</message>
+			<message sender="personA">GetHit()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="1" destination="2"> <messageserver sender="personA" owner="personA" title="THROW"/></transition>
+<state id="3" atomicpropositions="bottleShattered," >
+	<rebec name="personB">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="bottle">Throw()</message>
+		</queue>
+	</rebec>
+	<rebec name="personA">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="bottle">
+		<statevariables>
+			<variable name="Bottle.isShattered" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="personA">GetHit()</message>
+			<message sender="bottle">Restart()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="2" destination="3"> <messageserver sender="personB" owner="bottle" title="GETHIT"/></transition>
+<state id="4" atomicpropositions="bottleShattered," >
+	<rebec name="personB">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="bottle">Throw()</message>
+		</queue>
+	</rebec>
+	<rebec name="personA">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="bottle">
+		<statevariables>
+			<variable name="Bottle.isShattered" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="personA">GetHit()</message>
+			<message sender="bottle">Restart()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="2" destination="4"> <messageserver sender="personB" owner="bottle" title="GETHIT"/></transition>
+<state id="5" atomicpropositions="bottleShattered," >
+	<rebec name="personB">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="personA">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="bottle">
+		<statevariables>
+			<variable name="Bottle.isShattered" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="personA">GetHit()</message>
+			<message sender="bottle">Restart()</message>
+			<message sender="personB">GetHit()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="4" destination="5"> <messageserver sender="bottle" owner="personB" title="THROW"/></transition>
+<state id="6" atomicpropositions="bottleShattered," >
+	<rebec name="personB">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="personA">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="bottle">Throw()</message>
+		</queue>
+	</rebec>
+	<rebec name="bottle">
+		<statevariables>
+			<variable name="Bottle.isShattered" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="bottle">Restart()</message>
+			<message sender="personB">GetHit()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="5" destination="6"> <messageserver sender="personA" owner="bottle" title="GETHIT"/></transition>
+<state id="7" atomicpropositions="bottleShattered," >
+	<rebec name="personB">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="personA">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="bottle">
+		<statevariables>
+			<variable name="Bottle.isShattered" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="bottle">Restart()</message>
+			<message sender="personB">GetHit()</message>
+			<message sender="personA">GetHit()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="6" destination="7"> <messageserver sender="bottle" owner="personA" title="THROW"/></transition>
+<state id="8" atomicpropositions="" >
+	<rebec name="personB">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="personA">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="bottle">
+		<statevariables>
+			<variable name="Bottle.isShattered" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="personB">GetHit()</message>
+			<message sender="personA">GetHit()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="7" destination="8"> <messageserver sender="bottle" owner="bottle" title="RESTART"/></transition>
+<transition source="8" destination="4"> <messageserver sender="personB" owner="bottle" title="GETHIT"/></transition>
+<state id="4" atomicpropositions="bottleShattered," >
+	<rebec name="personB">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+			<message sender="bottle">Throw()</message>
+		</queue>
+	</rebec>
+	<rebec name="personA">
+		<statevariables>
+			<variable name="Person.didThrow" type="boolean">false</variable>
+		</statevariables>
+		<queue>
+		</queue>
+	</rebec>
+	<rebec name="bottle">
+		<statevariables>
+			<variable name="Bottle.isShattered" type="boolean">true</variable>
+		</statevariables>
+		<queue>
+			<message sender="personA">GetHit()</message>
+			<message sender="bottle">Restart()</message>
+		</queue>
+	</rebec>
+</state>
+<transition source="8" destination="4"> <messageserver sender="personB" owner="bottle" title="GETHIT"/></transition>
+</transitionsystem>
