@@ -4,6 +4,6 @@ from dataclasses import dataclass
 class Transition:
     sender: str
     owner: str
-    state_from: str
-    state_to: str
+    state_from_id: str
+    state_to_id: str
     title: str

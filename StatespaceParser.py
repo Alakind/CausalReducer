@@ -11,7 +11,11 @@ class StatespaceParser:
 
     @staticmethod
     def parse(filename: str) -> Dict[str, State]:
-        tree = ET.parse(filename)
+        try:
+            tree = ET.parse(filename)
+        except FileNotFoundError as e:
+            print("The statespace was not found.")
+            raise e
         root = tree.getroot()
 
         states = {}
@@ -22,8 +26,8 @@ class StatespaceParser:
                 states[new_state.id] = new_state
             elif child.tag == "transition":
                 new_transition = StatespaceParser.get_transition(child)
-                state_from = new_transition.state_from
-                states[state_from].transitions.append(new_transition)
+                state_from_id = new_transition.state_from_id
+                states[state_from_id].transitions.append(new_transition)
         
         return states
 
@@ -64,8 +68,8 @@ class StatespaceParser:
 
     @staticmethod
     def get_transition(transition_element: ET.Element) -> Transition:
-        state_from = transition_element.attrib["source"]
-        state_to = transition_element.attrib["destination"]
+        state_from_id = transition_element.attrib["source"]
+        state_to_id = transition_element.attrib["destination"]
 
         for child in transition_element:
             sender = child.attrib["sender"]
@@ -75,8 +79,8 @@ class StatespaceParser:
         new_transition = Transition(
             sender=sender,
             owner=owner,
-            state_from=state_from,
-            state_to=state_to,
+            state_from_id=state_from_id,
+            state_to_id=state_to_id,
             title=title
         )
 

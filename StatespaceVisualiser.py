@@ -7,11 +7,13 @@ from model.state import State
 class StatespaceVisualiser:
 
     @staticmethod
-    def visualise(statespace: Dict[str, State]):
+    def visualise(statespace: Dict[str, State], statespace_name: str = "my_graph", open: bool = True):
         dot = StatespaceVisualiser.get_dot_representation(statespace)        
 
-        dot.render('my_graph', format='png', cleanup=True)
-        dot.view()
+        dot.render(directory='graphs', filename=statespace_name, format='png', cleanup=True)
+
+        if open:
+            dot.view()
 
     @staticmethod
     def get_dot_representation(statespace: Dict[str, State]):
@@ -24,11 +26,13 @@ class StatespaceVisualiser:
 
             if state.id in visited:
                 return
+            
             visited.add(state.id)
             dot.node(state.id)
+
             for transition in state.transitions:
-                dot.edge(state.id, transition.state_to)
-                visit(transition.state_to)
+                dot.edge(state.id, transition.state_to_id)
+                visit(transition.state_to_id)
 
         for state in statespace:
             visit(state)
