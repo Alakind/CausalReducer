@@ -8,3 +8,6 @@ class State:
     id: str
     actors: List[Actor]
     transitions: List[Transition]
+    transitions_target: List[Transition]
+    is_hazardous: bool
+    is_initial: bool

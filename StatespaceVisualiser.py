@@ -7,17 +7,22 @@ from model.state import State
 class StatespaceVisualiser:
 
     @staticmethod
-    def visualise(statespace: Dict[str, State], statespace_name: str = "my_graph", open: bool = True):
+    def visualise(statespace: Dict[str, State], statespace_name: str = "my_graph", open_file: bool = True):
         dot = StatespaceVisualiser.get_dot_representation(statespace)        
+        dot.engine = 'dot'
+
+        print("Rendering...")
 
         dot.render(directory='graphs', filename=statespace_name, format='png', cleanup=True)
 
-        if open:
+        print("Done!")
+
+        if open_file:
             dot.view()
 
     @staticmethod
     def get_dot_representation(statespace: Dict[str, State]):
-        dot = Digraph()
+        dot = Digraph(format='png')
 
         visited = set()
 
@@ -28,14 +33,23 @@ class StatespaceVisualiser:
                 return
             
             visited.add(state.id)
-            dot.node(state.id)
+            color = "black"
+            if state.is_hazardous:
+                color = "red"
+            elif state.is_initial:
+                color = "blue"
+            dot.node(state.id, color=color)
 
             for transition in state.transitions:
-                dot.edge(state.id, transition.state_to_id)
+                from_id = state.id
+                to_id = transition.state_to_id
+                dot.edge(from_id, to_id, label=f"{transition.owner}.{transition.message.value}")
                 visit(transition.state_to_id)
 
+        i = 1
         for state in statespace:
             visit(state)
+            i += 1
 
         return dot
 
