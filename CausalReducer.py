@@ -1,6 +1,5 @@
 from typing import Dict, List
 from collections import deque
-from pprint import pprint
 import copy
 
 from model.state import State
@@ -14,7 +13,7 @@ class CausalReducer:
 
     bfs_queue = deque([])
 
-    def reduce_to_causal(self, statespace: Dict[str, State]) -> Dict[str, State]:
+    def reduce_to_causal(self, statespace: Dict[str, State], is_short=False) -> Dict[str, State]:
         self.statespace = statespace
         initial_state_id: str = "0"
 
@@ -27,7 +26,7 @@ class CausalReducer:
 
         causal_statespace = self.get_causal_statespace(self.causal_transitions)
         # return causal_statespace
-        self.refine_causal_transitions(causal_statespace[initial_state_id], causal_statespace)
+        self.refine_causal_transitions(causal_statespace[initial_state_id], causal_statespace, is_short)
 
         return self.get_causal_statespace(self.causal_transitions_refined)
 
@@ -65,13 +64,16 @@ class CausalReducer:
             (next_state, transitions) = self.bfs_queue.popleft()
             self.reverse_bfs_step(next_state, transitions)
 
-    def refine_causal_transitions(self, current_state: State, causal_statespace: Dict[str, State]):
+    def refine_causal_transitions(self, current_state: State, causal_statespace: Dict[str, State], is_short=False):
+        if is_short and current_state.is_hazardous:
+            return
+
         for transition in current_state.transitions:
             if transition.id in self.causal_transitions_refined.keys():
                 continue
             self.causal_transitions_refined[transition.id] = transition
 
-            self.refine_causal_transitions(causal_statespace[transition.state_to_id], causal_statespace)
+            self.refine_causal_transitions(causal_statespace[transition.state_to_id], causal_statespace, is_short)
 
     def reverse_bfs_step(self, current_state: State, transitions: List[Transition]):
         if current_state.id in self.state_transition_traces:
@@ -83,7 +85,6 @@ class CausalReducer:
             self.state_transition_traces[current_state.id] = transitions.copy()
         
         if current_state.is_initial:
-            # print("INITIAL")
             self.add_causal_transitions(transitions)
             return
         
