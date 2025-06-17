@@ -16,17 +16,18 @@ class CausalReducer:
 
     def reduce_to_causal(self, statespace: Dict[str, State]) -> Dict[str, State]:
         self.statespace = statespace
-        initial_state: State | None = None
+        initial_state_id: str = "0"
 
         for state in self.statespace.values():
             if state.is_hazardous:
                 self.reduce_single_bad_state(state)
+                self.state_transition_traces = {}
             if state.is_initial:
-                initial_state = state
-        
-        causal_statespace = self.get_causal_statespace(self.causal_transitions)
+                initial_state_id = state.id
 
-        self.refine_causal_transitions(initial_state, causal_statespace)
+        causal_statespace = self.get_causal_statespace(self.causal_transitions)
+        # return causal_statespace
+        self.refine_causal_transitions(causal_statespace[initial_state_id], causal_statespace)
 
         return self.get_causal_statespace(self.causal_transitions_refined)
 
@@ -82,6 +83,7 @@ class CausalReducer:
             self.state_transition_traces[current_state.id] = transitions.copy()
         
         if current_state.is_initial:
+            # print("INITIAL")
             self.add_causal_transitions(transitions)
             return
         
