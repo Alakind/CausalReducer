@@ -43,7 +43,7 @@ class StatespaceVisualiser:
             for transition in state.transitions:
                 from_id = state.id
                 to_id = transition.state_to_id
-                dot.edge(from_id, to_id, label=f"{transition.owner}.{transition.message.value}")
+                dot.edge(from_id, to_id, label=f"{transition.sender}->{transition.owner}.{transition.message.value}")
                 visit(transition.state_to_id)
 
         i = 1

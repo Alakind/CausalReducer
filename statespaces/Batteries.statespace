@@ -136,7 +136,7 @@
 <transition source="3" destination="4"> <messageserver sender="battery1" owner="battery1" title="TURNOFF"/></transition>
 <transition source="4" destination="3"> <messageserver sender="battery1" owner="battery1" title="TURNON"/></transition>
 <transition source="4" destination="1"> <messageserver sender="battery2" owner="battery2" title="TURNON"/></transition>
-<state id="5" atomicpropositions="" >
+<state id="5" atomicpropositions="hazOff," >
 	<rebec name="battery1">
 		<statevariables>
 			<variable name="Battery.isOn" type="boolean">false</variable>
