@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Optional
 from collections import deque
 import copy
 
@@ -10,6 +10,7 @@ class CausalReducer:
     causal_transitions: Dict[str, Transition] = {}
     causal_transitions_refined: Dict[str, Transition] = {}
     state_transition_traces: Dict[str, List[List[Transition]]] = {}
+    initial_state: Optional[State] = None
 
     bfs_queue = deque([])
 
@@ -22,6 +23,15 @@ class CausalReducer:
                 self.state_transition_traces = {}
 
         causal_statespace = self.get_causal_statespace(self.causal_transitions)
+
+        if self.initial_state is None:
+            raise Exception('No initial state found')
+
+        if is_short:
+            self.refine_causal_transitions(self.initial_state, causal_statespace, is_short)
+            return self.get_causal_statespace(self.causal_transitions_refined)
+            
+
         return causal_statespace
 
     def get_causal_statespace(self, transitions: Dict[str, Transition]) -> Dict[str, State]:
@@ -79,6 +89,7 @@ class CausalReducer:
         self.state_transition_traces[current_state.id].append(trace.copy())
         
         if current_state.is_initial:
+            self.initial_state = current_state
             self.add_causal_transitions(trace)
             return
         

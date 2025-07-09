@@ -7,13 +7,13 @@ from model.state import State
 class StatespaceVisualiser:
 
     @staticmethod
-    def visualise(statespace: Dict[str, State], statespace_name: str = "my_graph", open_file: bool = True):
+    def visualise(statespace: Dict[str, State], directory: str = "", statespace_name: str = "my_graph", open_file: bool = True):
         dot = StatespaceVisualiser.get_dot_representation(statespace)        
         dot.engine = 'dot'
 
         print("Rendering...")
 
-        dot.render(directory='graphs', filename=statespace_name, format='png', cleanup=True)
+        dot.render(directory=directory, filename=statespace_name, format='png', cleanup=True)
 
         print("Done!")
 
