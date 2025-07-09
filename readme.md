@@ -13,14 +13,14 @@ Learn more about Rebeca: [https://rebeca-lang.org/](https://rebeca-lang.org/)
 ## Usage
 
 ```bash
-python main.py [-h] [--short SHORT] -i INPUT_FILE
+python main.py [-h] [--short] -i INPUT_FILE
 ```
 
 ## Options
 
 - -i INPUT_FILE, --input INPUT_FILE — Path to the input .statespace file (required).
 
-- --short SHORT — Enable shortened mode (e.g., true, 1, etc.) (optional).
+- --short — Enable shortened mode (e.g., true, 1, etc.) (optional).
 
 - -h, --help — Show help message and exit.
 
