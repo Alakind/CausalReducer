@@ -13,4 +13,11 @@ class Transition:
     title: str
     message: Message
 
-    id: str
+    @property
+    def id(self) -> str:
+        return (
+            self.state_from_id + "_" +
+            self.state_to_id + "_" +
+            self.message.sender + "_" +
+            self.message.owner +
+            self.message.value)

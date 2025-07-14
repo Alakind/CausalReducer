@@ -109,8 +109,7 @@ class StatespaceParser:
             state_from_id=state_from_id,
             state_to_id=state_to_id,
             title=title,
-            message=message,
-            id=(state_from_id + "_" + state_to_id + "_" + message.value)
+            message=message
         )
 
         return new_transition
