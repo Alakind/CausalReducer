@@ -50,7 +50,7 @@ def main():
     saving_time = time() - start_time
 
     if args.time:
-        print(f"Parsing time: {saving_time:.4f} seconds")
+        print(f"Parsing time: {parsing_time:.4f} seconds")
         print(f"Causal analysis time: {analysis_time:.4f} seconds")
         if args.visualise: print(f"Rendering time: {visualisation_time:.4f} seconds")
         print(f"Saving statespace time: {saving_time:.4f} seconds")
