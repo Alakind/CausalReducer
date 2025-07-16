@@ -42,4 +42,8 @@ python3 main.py -i examples/GlassBottle.statespace --short --visualise --time
 
 - Python 3.6+
 
-- Standard Library only (no external dependencies).
+- Graphviz library.
+
+```bash
+pip install graphviz
+```
