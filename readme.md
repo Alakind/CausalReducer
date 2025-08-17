@@ -38,6 +38,34 @@ python3 main.py -i examples/Batteries.statespace
 python3 main.py -i examples/GlassBottle.statespace --short --visualise --time
 ```
 
+## Usage with Rebeca models
+
+In order to analyze a model, described in [Afra](https://rebeca-lang.org/alltools/Afra), follow the steps:
+
+- Create a new Afra project and select `Export state space` from the configuration menu.
+
+- Define the model.
+
+- Specify hazardous properties in `.property` file in section property->define. Use `haz` prefix. For example:
+
+```bash
+property {
+	define{
+		isOn1 = battery1.isOn;
+		isOn2 = battery2.isOn;
+		isOn3 = battery3.isOn;
+
+		hazAllBatteriesOff = !battery1.isOn && !battery2.isOn && !battery3.isOn;
+	}
+}
+```
+
+Any properties with `haz` prefix will be treated as hazardous during causal analysis.
+
+- Run the model checker.
+
+- Use the generated `.statespace` file as input for the Causal Reducer.
+
 ## Requirements
 
 - Python 3.6+
